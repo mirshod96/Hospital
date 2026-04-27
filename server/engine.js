@@ -44,17 +44,17 @@ export function processDecay(patient) {
   
   // Base decay if in waiting room unassigned
   if (patient.location === ZONES.ER_WAITING && patient.triageStatus === 'UNASSIGNED') {
-    decayRate += 0.2;
+    decayRate += 0.05;
   }
   
   // Triage based decay rate (red patients decay fast if not treated!)
-  if (patient.triageStatus === 'RED') decayRate += 1.5;
-  else if (patient.triageStatus === 'YELLOW') decayRate += 0.5;
-  else if (patient.triageStatus === 'GREEN') decayRate += 0.1;
+  if (patient.triageStatus === 'RED') decayRate += 0.3;
+  else if (patient.triageStatus === 'YELLOW') decayRate += 0.1;
+  else if (patient.triageStatus === 'GREEN') decayRate += 0.02;
 
   // Mitigation from treatments
-  const mitigation = patient.treatments.length * 0.4;
-  decayRate = Math.max(0.05, decayRate - mitigation); // Minimum baseline decay if not cured
+  const mitigation = patient.treatments.length * 0.1;
+  decayRate = Math.max(0.01, decayRate - mitigation); // Minimum baseline decay if not cured
 
   // Apply decay
   patient.vitalityScore = Math.max(0, patient.vitalityScore - decayRate);

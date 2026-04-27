@@ -15,11 +15,26 @@ function App() {
   useEffect(() => {
     socket.connect();
 
+    socket.on('connect', () => {
+      // Re-hydrate session if disconnected by network
+      setPlayerInfo((currentInfo) => {
+         if (currentInfo.name) {
+            socket.emit('joinLobby', { name: currentInfo.name });
+            if (currentInfo.role) {
+                setTimeout(() => socket.emit('selectRole', { role: currentInfo.role }), 100);
+            }
+         }
+         return currentInfo;
+      });
+    });
+
     socket.on('stateUpdate', (state) => {
       setGameState(state);
     });
 
     return () => {
+      socket.off('connect');
+      socket.off('stateUpdate');
       socket.disconnect();
     };
   }, []);
@@ -43,6 +58,19 @@ function App() {
       <div className="app-container" style={{ alignItems: 'center', justifyContent: 'center' }}>
         <h2 className="gradient-text">Connecting to HEUC-18 Server...</h2>
       </div>
+    );
+  }
+
+  if (gameState.gameState.status === 'ENDED') {
+    return (
+       <div className="app-container" style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', maxWidth: '600px' }}>
+              <h1 style={{ color: 'var(--triage-red)', fontSize: '3rem' }}>SIMULATION FAILED</h1>
+              <h2>Mortality Rate: {gameState.gameState.mortalityRate}%</h2>
+              <p style={{ color: 'var(--text-muted)' }}>The hospital ecosystem has collapsed. Critical errors in triage or slow diagnostics led to unacceptable patient mortality.</p>
+              <button className="btn primary" style={{ marginTop: '2rem' }} onClick={() => window.location.reload()}>Return to Lobby</button>
+          </div>
+       </div>
     );
   }
 
