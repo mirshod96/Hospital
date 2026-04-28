@@ -66,11 +66,21 @@ function App() {
   if (gameState.gameState.status === 'ENDED') {
     return (
        <div className="app-container" style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', maxWidth: '600px' }}>
+          <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', maxWidth: '600px', animation: 'fadeInUp 0.6s ease' }}>
               <h1 style={{ color: 'var(--triage-red)', fontSize: '3rem' }}>SIMULATION FAILED</h1>
               <h2>Mortality Rate: {gameState.gameState.mortalityRate}%</h2>
               <p style={{ color: 'var(--text-muted)' }}>The hospital ecosystem has collapsed. Critical errors in triage or slow diagnostics led to unacceptable patient mortality.</p>
-              <button className="btn primary" style={{ marginTop: '2rem' }} onClick={() => window.location.reload()}>Return to Lobby</button>
+              <button 
+                  className="btn primary" 
+                  style={{ marginTop: '2rem' }} 
+                  onClick={() => {
+                      socket.emit('resetGame');
+                      setHasSeenInstructions(false);
+                      setPlayerInfo(prev => ({ ...prev, role: null }));
+                  }}
+              >
+                  Reset Server & Return to Lobby
+              </button>
           </div>
        </div>
     );

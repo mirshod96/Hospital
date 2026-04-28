@@ -120,6 +120,22 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('resetGame', () => {
+    patients.length = 0; // Clear array while keeping reference
+    gameState.status = 'LOBBY';
+    gameState.gameTimeSecs = 0;
+    gameState.mortalityRate = 0;
+    gameState.deadCount = 0;
+    gameState.dischargedCount = 0;
+    
+    // Let players keep their names and roles, just reset the game state
+    // but maybe we can unassign roles if they want a hard reset
+    // For now, let's keep roles so they can just hit Start Game immediately again!
+    
+    io.emit('systemAlert', { message: 'Simulation has been reset. Returning to Lobby.' });
+    broadcastState();
+  });
+
   // Moderator Controls
   socket.on('startGame', () => {
     const player = players[socket.id];
