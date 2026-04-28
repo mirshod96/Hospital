@@ -93,6 +93,14 @@ export default function ERPhysicianUI({ state, socket, role }) {
                      <button className="btn primary" onClick={() => handleOrderTest('Request CT Scan')}>Request CT Scan (Rad)</button>
                      <button className="btn primary" onClick={() => handleOrderTest('Request Comprehensive Metabolic Panel')}>Request CMP (Lab)</button>
                    </div>
+
+                   <h3 style={{ marginTop: '2rem', color: 'var(--text-accent)' }}>Specialist Referrals</h3>
+                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                     <button className="btn" style={{ background: 'linear-gradient(135deg, #f43f5e, #be123c)' }} onClick={() => handleOrderTest('Consult Cardiology')}>Consult Cardiology</button>
+                     <button className="btn" style={{ background: 'linear-gradient(135deg, #8b5cf6, #6d28d9)' }} onClick={() => handleOrderTest('Consult Neurology')}>Consult Neurology</button>
+                     <button className="btn" style={{ background: 'linear-gradient(135deg, #10b981, #047857)' }} onClick={() => handleOrderTest('Consult General Surgery')}>Consult Gen. Surgery</button>
+                     <button className="btn" style={{ background: 'linear-gradient(135deg, #f59e0b, #b45309)' }} onClick={() => handleOrderTest('Consult Infectious Disease')}>Consult Inf. Disease</button>
+                   </div>
                 </div>
              </div>
            </>
