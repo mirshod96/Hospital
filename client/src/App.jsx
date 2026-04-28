@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import Lobby from './components/Lobby';
 import Dashboard from './components/Dashboard';
+import InstructionScreen from './components/InstructionScreen';
 import './App.css';
 
 // Create single socket instance
@@ -11,6 +12,7 @@ const socket = io(SOCKET_URL, { autoConnect: false });
 function App() {
   const [gameState, setGameState] = useState(null);
   const [playerInfo, setPlayerInfo] = useState({ name: '', role: null });
+  const [hasSeenInstructions, setHasSeenInstructions] = useState(false);
 
   useEffect(() => {
     socket.connect();
@@ -76,6 +78,10 @@ function App() {
 
   // Determine which screen to show
   const isRunning = gameState.gameState.status === 'RUNNING';
+
+  if (isRunning && !hasSeenInstructions) {
+    return <InstructionScreen role={playerInfo.role} onReady={() => setHasSeenInstructions(true)} />;
+  }
 
   return (
     <div className="app-container">

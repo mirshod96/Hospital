@@ -1,30 +1,30 @@
 :root {
-  --bg-dark: #0a0e17;
-  --bg-panel: rgba(18, 25, 40, 0.6);
-  --bg-panel-hover: rgba(18, 25, 40, 0.9);
+  --bg-dark: #f8fafc;
+  --bg-panel: rgba(255, 255, 255, 0.7);
+  --bg-panel-hover: rgba(255, 255, 255, 0.95);
   
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hilite: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-border-hilite: rgba(56, 189, 248, 0.8);
   
-  --text-main: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-accent: #38bdf8;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-accent: #0284c7;
   
-  --accent-primary: #3b82f6;
-  --accent-secondary: #8b5cf6;
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
   
   --triage-red: #ef4444;
-  --triage-yellow: #eab308;
-  --triage-green: #22c55e;
-  --triage-dead: #52525B;
+  --triage-yellow: #f59e0b;
+  --triage-green: #10b981;
+  --triage-dead: #94a3b8;
 
-  --btn-bg: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
-  --btn-bg-hover: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%);
+  --btn-bg: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  --btn-bg-hover: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
   
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   
-  --shadow-neon: 0 0 15px rgba(56, 189, 248, 0.3);
-  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --shadow-neon: 0 4px 20px rgba(56, 189, 248, 0.3);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   
   font-family: var(--font-main);
   background-color: var(--bg-dark);
@@ -38,7 +38,7 @@ body {
   width: 100vw;
   overflow: hidden; /* Keep app fixed, only distinct panels scroll */
   display: flex;
-  background: radial-gradient(circle at top right, #111827, #020617);
+  background: radial-gradient(circle at top right, #e0f2fe, #f8fafc);
 }
 
 #root {
@@ -74,7 +74,7 @@ body {
   cursor: pointer;
   transition: all 0.2s ease, transform 0.1s ease;
   min-width: 120px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .btn:hover {
@@ -99,7 +99,7 @@ body {
 }
 
 .btn.danger {
-  background: linear-gradient(135deg, #b91c1c, #991b1b);
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
 }
 
 /* Typography Headings */
@@ -110,7 +110,7 @@ h1, h2, h3 {
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #38bdf8, #818cf8);
+  background: linear-gradient(to right, #0284c7, #4f46e5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -118,7 +118,7 @@ h1, h2, h3 {
 
 /* Inputs */
 .input-field {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--glass-border);
   color: var(--text-main);
   padding: 0.75rem 1rem;
@@ -130,7 +130,7 @@ h1, h2, h3 {
 }
 .input-field:focus {
   border-color: var(--text-accent);
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5);
 }
 
 /* Scrollbar styling */
@@ -141,11 +141,11 @@ h1, h2, h3 {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.1);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.2);
 }
 
 /* Layout Utilities */
@@ -164,4 +164,9 @@ h1, h2, h3 {
   flex: 1;
   gap: 1rem;
   min-height: 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
